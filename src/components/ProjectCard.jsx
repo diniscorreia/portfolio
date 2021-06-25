@@ -157,11 +157,13 @@ const ProjectCardImageContainer = styled("div")`
     }
 `
 
-const ProjectCard = ({ category, title, description, thumbnail, uid}) => (
+const ProjectCard = ({ tags, title, description, thumbnail, uid}) => (
     <ProjectCardContainer to={`/work/${uid}`}>
         <ProjectCardContent className="ProjectCardContent">
             <ProjectCardCategory>
-                {category[0].text}
+                {tags.map((tag, i) => (
+                    <span key={tag.project_tag[0].text}>{i > 0 && ", "}{tag.project_tag[0].text}</span>
+                ))}
             </ProjectCardCategory>
             <ProjectCardTitle>
                 {title[0].text}
@@ -182,7 +184,7 @@ const ProjectCard = ({ category, title, description, thumbnail, uid}) => (
 export default ProjectCard;
 
 ProjectCard.propTypes = {
-    category: PropTypes.array.isRequired,
+    tags: PropTypes.array.isRequired,
     thumbnail: PropTypes.object.isRequired,
     title: PropTypes.array.isRequired,
     description: PropTypes.array.isRequired,

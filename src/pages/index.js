@@ -148,10 +148,10 @@ const RenderBody = ({ home, projects, meta }) => (
             {projects.map((project, i) => (
                 <ProjectCard
                     key={i}
-                    category={project.node.project_category}
+                    tags={project.node.project_tags}
                     title={project.node.project_title}
                     description={project.node.project_preview_description}
-                    thumbnail={project.node.project_preview_thumbnail}
+                    thumbnail={project.node.project_preview_thumbnail_image}
                     uid={project.node._meta.uid}
                 />
             ))}
@@ -213,13 +213,16 @@ export const query = graphql`
                     }
                 }
             }
-            allProjects {
+            allProjects(sortBy: project_post_date_DESC) {
                 edges {
                     node {
                         project_title
                         project_preview_description
-                        project_preview_thumbnail
+                        project_preview_thumbnail_image
                         project_category
+                        project_tags {
+                            project_tag
+                        }
                         project_post_date
                         _meta {
                             uid

@@ -133,7 +133,7 @@ export const query = graphql`
                     node {
                         project_title
                         project_preview_description
-                        project_preview_thumbnail
+                        project_preview_thumbnail_image
                         project_category
                         project_post_date
                         project_hero_image

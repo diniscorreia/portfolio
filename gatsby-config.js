@@ -9,6 +9,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-image`,
+    `gatsby-plugin-image`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-resolve-src`,
@@ -24,7 +25,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-        resolve: 'gatsby-source-prismic-graphql',
+        resolve: '@prismicio/gatsby-source-prismic-graphql',
         options: {
             repositoryName: 'dc-portfolio', // (REQUIRED, replace with your own)
             linkResolver: () => post => `/${post.uid}`,
