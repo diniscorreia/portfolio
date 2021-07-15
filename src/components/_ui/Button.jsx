@@ -11,7 +11,7 @@ const ButtonContainer = styled("button")`
     outline: none;
     border: none;
     font-size: 1rem;
-    border-radius: 2px;
+    border-radius: 4px;
     position: relative;
     transition: background 100ms ease-in-out;
 
@@ -24,21 +24,9 @@ const ButtonContainer = styled("button")`
         margin: 0;
     }
 
-    &:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, ${colors.pink400} 0%, ${colors.purple400} 100%);
-        z-index: -1;
-    }
-
     &:hover {
         cursor: pointer;
-        background: transparent;
-        transition: background 100ms ease-in-out;
+        background: ${colors.blue700};
     }
 
     &.Button--secondary {

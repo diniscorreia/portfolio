@@ -3,17 +3,16 @@ import { Link } from "gatsby";
 import styled from "@emotion/styled";
 import colors from "styles/colors";
 import Logo from "components/_ui/Logo";
-import spooch from "images/oscar-icon.png"
 
 const FooterContainer = styled("div")`
-    padding-top: 3.75em;
-    padding-bottom: 3em;
+    padding-bottom: 2.5em;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     svg {
-        max-width: 50px;
+        width: 50px;
+        height: 55px;
     }
 `
 
@@ -43,19 +42,13 @@ const FooterAuthor = styled("a")`
     }
 `
 
-const FooterSpooch = styled("img")`
-    max-width: 33px;
-    margin-top: 0.25em;
-`
-
 const Footer = () => (
     <FooterContainer>
         <Link to="/">
             <Logo />
         </Link>
-        <FooterAuthor href="https://www.marguerite.io/?utm_source=prist&utm_medium=footer&utm_campaign=prist_starter">
-            © 2019 — Designed & developed by Marguerite Roth
-            <FooterSpooch className="FooterSpooch" src={spooch} />
+        <FooterAuthor href="https://diniscorreia.com">
+            © 2020 — Dinis Correia
         </FooterAuthor>
     </FooterContainer>
 )

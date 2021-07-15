@@ -124,6 +124,7 @@ const ProjectCardImageContainer = styled("div")`
     position: relative;
     padding-left: 2em;
     padding-right: 2em;
+    padding-top: 2rem;
 
     @media(max-width:${dimensions.maxwidthTablet}px) {
         padding-top: 3em;
@@ -147,9 +148,10 @@ const ProjectCardImageContainer = styled("div")`
     }
 
     img {
-        max-width: 400px;
         width: 100%;
         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.04);
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
 
         @media(max-width:${dimensions.maxwidthTablet}px) {
             max-width: 300px;
@@ -158,11 +160,14 @@ const ProjectCardImageContainer = styled("div")`
 `
 
 const ProjectCard = ({ tags, title, description, thumbnail, uid}) => (
-    <ProjectCardContainer to={`/work/${uid}`}>
+    <ProjectCardContainer to={`work/${uid}`}>
         <ProjectCardContent className="ProjectCardContent">
             <ProjectCardCategory>
-                {tags.map((tag, i) => (
-                    <span key={tag.project_tag[0].text}>{i > 0 && ", "}{tag.project_tag[0].text}</span>
+            {console.log(tags)}
+                {tags
+                    .sort((a, b) => a.project_tag > b.project_tag ? 1 : -1)
+                    .map((tag, i) => (
+                    <span key={tag.project_tag}>{i > 0 && ", "}{tag.project_tag}</span>
                 ))}
             </ProjectCardCategory>
             <ProjectCardTitle>

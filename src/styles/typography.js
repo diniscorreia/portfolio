@@ -1,4 +1,5 @@
 import css from '@emotion/css';
+import colors from "styles/colors";
 import dimensions from "styles/dimensions";
 
 const typeStyles = css`
@@ -45,7 +46,11 @@ const typeStyles = css`
     }
 
     a {
+        color: ${colors.blue600};
+        transition: color 100ms ease-in-out;
+
         &:hover {
+            color: ${colors.blue900};
             cursor: pointer;
         }
     }

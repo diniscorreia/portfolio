@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { RichText } from "prismic-reactjs";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import styled from "@emotion/styled";
 import colors from "styles/colors";
 import dimensions from "styles/dimensions";
@@ -22,7 +22,7 @@ const Hero = styled("div")`
     }
 
     h1 {
-        margin-bottom: 1em;
+        margin-bottom: 0;
 
         a {
             text-decoration: none;
@@ -50,7 +50,7 @@ const Hero = styled("div")`
 `
 
 const Section = styled("div")`
-    margin-bottom: 10em;
+    margin-bottom: 5em;
     display: flex;
     flex-direction: column;
 
@@ -63,41 +63,15 @@ const Section = styled("div")`
     }
 `
 
-const WorkAction = styled(Link)`
-    font-weight: 600;
-    text-decoration: none;
-    color: currentColor;
-    transition: all 150ms ease-in-out;
-    margin-left: auto;
-
-    @media(max-width:${dimensions.maxwidthTablet}px) {
-       margin: 0 auto;
-    }
-
-    span {
-        margin-left: 1em;
-        transform: translateX(-8px);
-        display: inline-block;
-        transition: transform 400ms ease-in-out;
-    }
-
-    &:hover {
-        color: ${colors.blue500};
-        transition: all 150ms ease-in-out;
-
-        span {
-            transform: translateX(0px);
-            opacity: 1;
-            transition: transform 150ms ease-in-out;
-        }
-    }
+const SectionTitle = styled("h3")`
+    margin-bottom: 1em;
 `
 
 const RenderBody = ({ home, projects, meta }) => (
     <>
         <Helmet
             title={meta.title}
-            titleTemplate={`%s | ${meta.title}`}
+            titleTemplate={`%s`}
             meta={[
                 {
                     name: `description`,
@@ -116,16 +90,24 @@ const RenderBody = ({ home, projects, meta }) => (
                     content: `website`,
                 },
                 {
+                    property: `og:image`,
+                    content: meta.url + meta.image,
+                },
+                {
                     name: `twitter:card`,
                     content: `summary`,
                 },
                 {
                     name: `twitter:creator`,
-                    content: meta.author,
+                    content: meta.twitterUsername,
                 },
                 {
                     name: `twitter:title`,
                     content: meta.title,
+                },
+                {
+                    property: `twitter:image`,
+                    content: meta.url + meta.image,
                 },
                 {
                     name: `twitter:description`,
@@ -136,6 +118,7 @@ const RenderBody = ({ home, projects, meta }) => (
         <Hero>
             <>
                 {RichText.render(home.hero_title)}
+                {RichText.render(home.content)}
             </>
             <a href={home.hero_button_link.url}
                target="_blank" rel="noopener noreferrer">
@@ -145,6 +128,9 @@ const RenderBody = ({ home, projects, meta }) => (
             </a>
         </Hero>
         <Section>
+            <SectionTitle>
+                Selected Work
+            </SectionTitle>
             {projects.map((project, i) => (
                 <ProjectCard
                     key={i}
@@ -155,9 +141,6 @@ const RenderBody = ({ home, projects, meta }) => (
                     uid={project.node._meta.uid}
                 />
             ))}
-            <WorkAction to={"/work"}>
-                See more work <span>&#8594;</span>
-            </WorkAction>
         </Section>
         <Section>
             {RichText.render(home.about_title)}
@@ -236,6 +219,9 @@ export const query = graphql`
                 title
                 description
                 author
+                twitterUsername
+                url
+                image
             }
         }
     }
