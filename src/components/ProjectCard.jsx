@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
+import { Link, withPrefix } from "gatsby";
 import { RichText } from "prismic-reactjs";
 import styled from "@emotion/styled";
 import dimensions from "styles/dimensions";
@@ -160,7 +160,7 @@ const ProjectCardImageContainer = styled("div")`
 `
 
 const ProjectCard = ({ tags, title, description, thumbnail, uid}) => (
-    <ProjectCardContainer to={`work/${uid}`}>
+    <ProjectCardContainer to={withPrefix(`/work/${uid}`)}>
         <ProjectCardContent className="ProjectCardContent">
             <ProjectCardCategory>
             {console.log(tags)}
