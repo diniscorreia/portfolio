@@ -206,7 +206,7 @@ export const query = graphql`
                         project_preview_thumbnail_imageSharp {
                             childImageSharp {
                                 fluid(maxWidth: 618) {
-                                ...GatsbyImageSharpFluid
+                                ...GatsbyImageSharpFluid_noBase64
                                 }
                             }
                         }
