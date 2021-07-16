@@ -131,13 +131,14 @@ const RenderBody = ({ home, projects, meta }) => (
             <SectionTitle>
                 Selected Work
             </SectionTitle>
+            
             {projects.map((project, i) => (
                 <ProjectCard
                     key={i}
                     tags={project.node.project_tags}
                     title={project.node.project_title}
                     description={project.node.project_preview_description}
-                    thumbnail={project.node.project_preview_thumbnail_image}
+                    thumbnail={project.node.project_preview_thumbnail_imageSharp}
                     uid={project.node._meta.uid}
                 />
             ))}
@@ -202,6 +203,13 @@ export const query = graphql`
                         project_title
                         project_preview_description
                         project_preview_thumbnail_image
+                        project_preview_thumbnail_imageSharp {
+                            childImageSharp {
+                                fluid(maxWidth: 618) {
+                                ...GatsbyImageSharpFluid
+                                }
+                            }
+                        }
                         project_category
                         project_tags {
                             project_tag

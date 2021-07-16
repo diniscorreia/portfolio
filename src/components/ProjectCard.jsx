@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
+import Img from "gatsby-image";
 import { RichText } from "prismic-reactjs";
 import styled from "@emotion/styled";
 import dimensions from "styles/dimensions";
@@ -127,7 +128,9 @@ const ProjectCardImageContainer = styled("div")`
     padding-top: 2rem;
 
     @media(max-width:${dimensions.maxwidthTablet}px) {
-        padding-top: 3em;
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+        padding-top: 1.5rem;
         max-height: 200px;
         flex-direction: column;
         align-items: center;
@@ -146,16 +149,17 @@ const ProjectCardImageContainer = styled("div")`
         opacity: 0;
         transition: all 150ms ease-in-out;
     }
+`
 
-    img {
-        width: 100%;
-        box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.04);
-        border-top-right-radius: 4px;
-        border-top-left-radius: 4px;
+const ProjectCardImageContainerInner = styled("div")`
+    width: 100%;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.16);
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    overflow: hidden;
 
-        @media(max-width:${dimensions.maxwidthTablet}px) {
-            max-width: 300px;
-        }
+    @media(max-width:${dimensions.maxwidthTablet}px) {
+        max-width: 320px;
     }
 `
 
@@ -180,7 +184,9 @@ const ProjectCard = ({ tags, title, description, thumbnail, uid}) => (
             </ProjectCardAction>
         </ProjectCardContent>
         <ProjectCardImageContainer className="ProjectCardImageContainer">
-            <img src={thumbnail.url} alt={title[0].text}/>
+            <ProjectCardImageContainerInner>
+                <Img fluid={thumbnail.childImageSharp.fluid} />
+            </ProjectCardImageContainerInner>
         </ProjectCardImageContainer>
     </ProjectCardContainer>
 )

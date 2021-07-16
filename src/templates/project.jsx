@@ -4,23 +4,45 @@ import Helmet from "react-helmet";
 import styled from "@emotion/styled";
 import colors from "styles/colors";
 import { Link, graphql } from 'gatsby';
+import Img from "gatsby-image";
 import { RichText } from "prismic-reactjs";
 import Button from "components/_ui/Button";
 import Layout from "components/Layout";
+import dimensions from "styles/dimensions";
 
 const ProjectHeroContainer = styled("div")`
     background: ${colors.grey200};
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
     overflow: hidden;
     position: relative;
-    padding-top: 2.25em;
-    margin-bottom: 3.5em;
+    padding-top: 2.5em;
+    margin-bottom: 2.5em;
 
     img {
         max-width: 600px;
     }
+
+    @media(max-width:${dimensions.maxwidthTablet}px) {
+        margin-left: -2.5em;
+        margin-right: -2.5em;
+        padding-left: 2.5em;
+        padding-right: 2.5em;
+    }
+
+    @media(max-width:${dimensions.maxwidthMobile}px) {
+        margin-left: -2em;
+        margin-right: -2em;
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+`
+
+const ProjectHeroContainerImage = styled("div")`
+    max-width: 600px;
+    margin: 0 auto;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.32);
 `
 
 const ProjectTitle = styled("div") `
@@ -54,8 +76,8 @@ const Project = ({ project, meta }) => {
     return (
         <>
             <Helmet
-                title={`${project.project_title[0].text} | Prist, Gatsby & Prismic Starter`}
-                titleTemplate={`%s | ${meta.title}`}
+                title={`${project.project_title[0].text} | Dinis Correia`}
+                titleTemplate={`%s`}
                 meta={[
                     {
                         name: `description`,
@@ -63,7 +85,7 @@ const Project = ({ project, meta }) => {
                     },
                     {
                         property: `og:title`,
-                        content: `${project.project_title[0].text} | Prist, Gatsby & Prismic Starter`,
+                        content: `${project.project_title[0].text} | Dinis Correia`,
                     },
                     {
                         property: `og:description`,
@@ -74,16 +96,24 @@ const Project = ({ project, meta }) => {
                         content: `website`,
                     },
                     {
+                        property: `og:image`,
+                        content: meta.url + meta.image,
+                    },
+                    {
                         name: `twitter:card`,
                         content: `summary`,
                     },
                     {
                         name: `twitter:creator`,
-                        content: meta.author,
+                        content: meta.twitterUsername,
                     },
                     {
                         name: `twitter:title`,
                         content: meta.title,
+                    },
+                    {
+                        property: `twitter:image`,
+                        content: meta.url + meta.image,
                     },
                     {
                         name: `twitter:description`,
@@ -95,9 +125,11 @@ const Project = ({ project, meta }) => {
                 <ProjectTitle>
                     {RichText.render(project.project_title)}
                 </ProjectTitle>
-                {project.project_hero_image && (
+                {project.project_preview_thumbnail_image && (
                     <ProjectHeroContainer>
-                        <img src={project.project_hero_image.url} alt="bees" />
+                        <ProjectHeroContainerImage>
+                            <Img fluid={project.project_preview_thumbnail_imageSharp.childImageSharp.fluid} />
+                        </ProjectHeroContainerImage>
                     </ProjectHeroContainer>
                 )}
                 <ProjectBody>
@@ -133,10 +165,16 @@ export const query = graphql`
                     node {
                         project_title
                         project_preview_description
-                        project_preview_thumbnail_image
                         project_category
                         project_post_date
-                        project_hero_image
+                        project_preview_thumbnail_image
+                        project_preview_thumbnail_imageSharp {
+                            childImageSharp {
+                                fluid(maxWidth: 600) {
+                                ...GatsbyImageSharpFluid
+                                }
+                            }
+                        }
                         project_description
                         _meta {
                             uid
@@ -150,6 +188,9 @@ export const query = graphql`
                 title
                 description
                 author
+                twitterUsername
+                url
+                image
             }
         }
     }
