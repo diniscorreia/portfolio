@@ -125,7 +125,7 @@ const Project = ({ project, meta }) => {
                 <ProjectTitle>
                     {RichText.render(project.project_title)}
                 </ProjectTitle>
-                {project.project_preview_thumbnail_imageSharp && (
+                {project.project_preview_thumbnail_image && (
                     <ProjectHeroContainer>
                         <ProjectHeroContainerImage>
                             <Img fluid={project.project_preview_thumbnail_imageSharp.childImageSharp.fluid} />
@@ -170,7 +170,7 @@ export const query = graphql`
                         project_preview_thumbnail_image
                         project_preview_thumbnail_imageSharp {
                             childImageSharp {
-                                fluid(maxWidth: 618) {
+                                fluid(maxWidth: 600) {
                                 ...GatsbyImageSharpFluid_noBase64
                                 }
                             }
