@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, withPrefix } from "gatsby";
+import { Link } from "gatsby";
 import { RichText } from "prismic-reactjs";
 import styled from "@emotion/styled";
 import dimensions from "styles/dimensions";
@@ -160,10 +160,9 @@ const ProjectCardImageContainer = styled("div")`
 `
 
 const ProjectCard = ({ tags, title, description, thumbnail, uid}) => (
-    <ProjectCardContainer to={withPrefix(`/work/${uid}`)}>
+    <ProjectCardContainer to={`/work/${uid}`}>
         <ProjectCardContent className="ProjectCardContent">
             <ProjectCardCategory>
-            {console.log(tags)}
                 {tags
                     .sort((a, b) => a.project_tag > b.project_tag ? 1 : -1)
                     .map((tag, i) => (
