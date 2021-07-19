@@ -12,9 +12,9 @@ import Layout from "components/Layout";
 import ProjectCard from "components/ProjectCard";
 
 const Hero = styled("div")`
-    padding-top: 2.5em;
+    padding-top: 3em;
     padding-bottom: 3em;
-    margin-bottom: 6em;
+    margin-bottom: 3em;
     max-width: 830px;
 
     @media(max-width:${dimensions.maxwidthMobile}px) {
@@ -23,6 +23,7 @@ const Hero = styled("div")`
 
     h1 {
         margin-bottom: 0;
+        margin-top: 0;
 
         a {
             text-decoration: none;
@@ -69,6 +70,7 @@ const Section = styled("div")`
 
 const SectionTitle = styled("h2")`
     margin-bottom: 1em;
+    margin-top: 0;
 `
 
 const RenderBody = ({ home, projects, meta }) => (
