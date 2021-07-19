@@ -75,7 +75,7 @@ const HeaderContent = styled("div")`
 const Header = () => (
     <HeaderContainer>
         <HeaderContent>
-            <Link to="/">
+            <Link to="/" aria-label="Back to homepage" title="Back to homepage">
                 <Logo/>
             </Link>
         </HeaderContent>

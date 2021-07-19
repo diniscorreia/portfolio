@@ -8,3 +8,6 @@
 // const { linkResolver } = require('./src/utils/prismic-configuration');
 
 // registerLinkResolver(linkResolver);
+
+import "@fontsource/rubik/variable.css";
+import "@fontsource/rubik/variable-italic.css"; 

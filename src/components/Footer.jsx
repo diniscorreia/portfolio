@@ -18,7 +18,7 @@ const FooterContainer = styled("div")`
 
 const FooterAuthor = styled("a")`
     font-size: 0.75em;
-    color: ${colors.grey700};
+    color: ${colors.grey900};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,11 +44,14 @@ const FooterAuthor = styled("a")`
 
 const Footer = () => (
     <FooterContainer>
-        <Link to="/">
+        <Link to="/" aria-label="Back to homepage" title="Back to homepage">
             <Logo />
         </Link>
+        <FooterAuthor href="https://www.gatsbyjs.com/">
+           Built with Gatsby
+        </FooterAuthor>
         <FooterAuthor href="https://diniscorreia.com">
-            © 2020 — Dinis Correia
+            © 2021 — Dinis Correia
         </FooterAuthor>
     </FooterContainer>
 )

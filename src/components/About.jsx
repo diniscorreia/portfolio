@@ -3,6 +3,8 @@ import Button from "components/_ui/Button";
 import styled from "@emotion/styled";
 import dimensions from "styles/dimensions";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const AboutContainer = styled("div")`
     padding-top: 1em;
@@ -36,7 +38,7 @@ const AboutLink = styled("a")`
     text-decoration: none;
     color: currentColor;
 
-    span {
+    .svg-inline--fa  {
         margin-left: 1em;
         transform: translateX(-8px);
         display: inline-block;
@@ -45,7 +47,7 @@ const AboutLink = styled("a")`
     }
 
     &:hover {
-        span {
+        .svg-inline--fa  {
             transform: translateX(0px);
             opacity: 1;
             transition: all 150ms ease-in-out;
@@ -74,7 +76,7 @@ const About = ({ bio, socialLinks }) => (
                     href={social.about_link[0].spans[0].data.url}
                     target="_blank" rel="noopener noreferrer">
                     {social.about_link[0].text}
-                    <span>&#8594;</span>
+                    <FontAwesomeIcon icon={faArrowRight} />
                 </AboutLink>
             ))}
         </AboutLinkContainer>

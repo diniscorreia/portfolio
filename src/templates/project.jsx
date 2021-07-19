@@ -14,12 +14,8 @@ const ProjectHeroContainer = styled("div")`
     background: ${colors.grey200};
     overflow: hidden;
     position: relative;
-    padding-top: 2.5em;
-    margin-bottom: 2.5em;
-
-    img {
-        max-width: 600px;
-    }
+    padding-top: 2em;
+    margin-bottom: 2em;
 
     @media(max-width:${dimensions.maxwidthTablet}px) {
         margin-left: -2.5em;
@@ -37,7 +33,7 @@ const ProjectHeroContainer = styled("div")`
 `
 
 const ProjectHeroContainerImage = styled("div")`
-    max-width: 600px;
+    max-width: 908px;
     margin: 0 auto;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
@@ -55,9 +51,13 @@ const ProjectBody = styled("div")`
     max-width: 550px;
     margin: 0 auto;
 
+    > p {
+        font-size: 1.125em;
+    }
+
     .block-img {
-        margin-top: 3.5em;
-        margin-bottom: 0.5em;
+        margin-top: 2em;
+        margin-bottom: 2em;
 
         img {
             width: 100%;
@@ -71,11 +71,72 @@ const WorkLink = styled(Link)`
     text-align: center;
 `
 
+const ButtonGroup = styled("div")`
+    margin-top: 3em;
+
+    button {
+        padding: 0.95em 1.8em;
+        font-size: 0.95rem;
+    }
+
+    a {
+        margin-top: 1.5em;
+        display: block;
+        text-align: center;
+    }
+`
+
+const ProjectMeta = styled("div")`
+    margin-bottom: 3em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 3em;
+    text-align: center;
+
+    @media(max-width: ${dimensions.maxwidthTablet}px) {
+        grid-template-columns: 1fr 1fr;
+        grid-gap 1.5em;
+        text-align: left;
+    }
+`
+
+const ProjectMetaTitle = styled("h2") `
+    line-height: 1.2;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    color: ${colors.grey900};
+`
+
+const ProjectMetaBlock = styled("div") `
+    span,
+    li {
+        color: ${colors.grey700};
+        font-size: 0.9em;
+    }
+`
+
+const ProjectMetaList = styled("ul") `
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+        list-style: none;
+        
+        &:not(:last-child) {
+            margin-bottom: 0.125em;
+        }
+    }
+`
+
 
 const Project = ({ project, meta }) => {
     return (
         <>
             <Helmet
+                htmlAttributes={{
+                    lang: 'en',
+                }}
                 title={`${project.project_title[0].text} | Dinis Correia`}
                 titleTemplate={`%s`}
                 meta={[
@@ -132,13 +193,63 @@ const Project = ({ project, meta }) => {
                         </ProjectHeroContainerImage>
                     </ProjectHeroContainer>
                 )}
+                <ProjectMeta>
+                    <ProjectMetaBlock>
+                        <ProjectMetaTitle>
+                            Year
+                        </ProjectMetaTitle>
+                        <span>{project.project_post_date.substring(0,4)}</span>
+                    </ProjectMetaBlock>
+
+                    <ProjectMetaBlock>
+                        <ProjectMetaTitle>
+                            Roles
+                        </ProjectMetaTitle>
+                        <ProjectMetaList>
+                            {project.project_tags
+                                .sort((a, b) => a.project_tag > b.project_tag ? 1 : -1)
+                                .map((tag, i) => (
+                                <li key={tag.project_tag}>{tag.project_tag}</li>
+                            ))}
+                        </ProjectMetaList>
+                    </ProjectMetaBlock>
+
+                    <ProjectMetaBlock>
+                        <ProjectMetaTitle>
+                            Topics
+                        </ProjectMetaTitle>
+                        <ProjectMetaList>
+                            {project.project_topics
+                                .sort((a, b) => a.project_topic > b.project_topic ? 1 : -1)
+                                .map((topic, i) => (
+                                <li key={topic.project_topic}>{topic.project_topic}</li>
+                            ))}
+                        </ProjectMetaList>
+                    </ProjectMetaBlock>
+
+                    <ProjectMetaBlock>
+                        <ProjectMetaTitle>
+                            For
+                        </ProjectMetaTitle>
+                        <span>{project.project_entity[0].text}</span>
+                    </ProjectMetaBlock>
+                </ProjectMeta>
                 <ProjectBody>
                     {RichText.render(project.project_description)}
-                    <WorkLink to={"/"}>
-                        <Button className="Button--secondary">
-                            See other work
-                        </Button>
-                    </WorkLink>
+                    <ButtonGroup>
+                        {project.project_url.url && (
+                            <a href={project.project_url.url}>
+                                <Button>
+                                    View project
+                                </Button>
+                            </a>
+                        )}
+                        <WorkLink to={"/"}>
+                            <Button className="Button--secondary">
+                                See other work
+                            </Button>
+                        </WorkLink>
+                    </ButtonGroup>
                 </ProjectBody>
             </Layout>
         </>
@@ -170,12 +281,26 @@ export const query = graphql`
                         project_preview_thumbnail_image
                         project_preview_thumbnail_imageSharp {
                             childImageSharp {
-                                fluid(maxWidth: 600) {
-                                ...GatsbyImageSharpFluid_noBase64
+                                fluid(maxWidth: 908) {
+                                ...GatsbyImageSharpFluid_withWebp
                                 }
                             }
                         }
                         project_description
+                        project_tags {
+                            project_tag
+                        }
+                        project_topics {
+                            project_topic
+                        }
+                        project_post_date
+                        project_entity
+                        project_url {
+                            _linkType
+                            ... on PRISMIC__ExternalLink {
+                                url
+                            }
+                        }
                         _meta {
                             uid
                         }

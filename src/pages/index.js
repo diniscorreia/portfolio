@@ -47,6 +47,10 @@ const Hero = styled("div")`
             }
         }
     }
+
+    p {
+        font-size: 1.125em;
+    }
 `
 
 const Section = styled("div")`
@@ -63,13 +67,16 @@ const Section = styled("div")`
     }
 `
 
-const SectionTitle = styled("h3")`
+const SectionTitle = styled("h2")`
     margin-bottom: 1em;
 `
 
 const RenderBody = ({ home, projects, meta }) => (
     <>
         <Helmet
+            htmlAttributes={{
+                lang: 'en',
+            }}
             title={meta.title}
             titleTemplate={`%s`}
             meta={[
@@ -139,6 +146,7 @@ const RenderBody = ({ home, projects, meta }) => (
                     title={project.node.project_title}
                     description={project.node.project_preview_description}
                     thumbnail={project.node.project_preview_thumbnail_imageSharp}
+                    date={project.node.project_post_date}
                     uid={project.node._meta.uid}
                 />
             ))}
@@ -206,7 +214,7 @@ export const query = graphql`
                         project_preview_thumbnail_imageSharp {
                             childImageSharp {
                                 fluid(maxWidth: 618) {
-                                ...GatsbyImageSharpFluid_noBase64
+                                ...GatsbyImageSharpFluid_withWebp
                                 }
                             }
                         }

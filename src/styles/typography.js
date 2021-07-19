@@ -46,7 +46,7 @@ const typeStyles = css`
     }
 
     a {
-        color: ${colors.blue600};
+        color: ${colors.blue700};
         transition: color 100ms ease-in-out;
 
         &:hover {

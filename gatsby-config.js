@@ -4,9 +4,10 @@ module.exports = {
     title: `Dinis Correia`,
     description: `I'm a web designer and front-end developer. I design and build websites and help others to tell stories in new and engaging ways.`,
     author: `Dinis Correia`,
-    url: "https://diniscorreia.com/portfolio", 
-    image: "/images/og-image.jpg",
-    twitterUsername: "@diniscorreia"
+    siteUrl: `https://diniscorreia.com/portfolio`,
+    url: `https://diniscorreia.com/portfolio`, 
+    image: `/images/og-image.jpg`,
+    twitterUsername: `@diniscorreia`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -24,15 +25,6 @@ module.exports = {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
-    },
-    {
-      resolve: `gatsby-plugin-google-fonts`,
-      options: {
-        fonts: [
-          `Rubik\:400,400i,600,600i` // you can also specify font weights and styles
-        ],
-        display: 'swap'
-      }
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

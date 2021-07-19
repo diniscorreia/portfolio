@@ -6,6 +6,8 @@ import styled from "@emotion/styled";
 import dimensions from "styles/dimensions";
 import colors from "styles/colors";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const ProjectCardContainer = styled(Link)`
     display: grid;
@@ -36,7 +38,7 @@ const ProjectCardContainer = styled(Link)`
             color: ${colors.blue500};
             transition: all 150ms ease-in-out;
 
-            span {
+            .svg-inline--fa {
                 transform: translateX(0px);
                 opacity: 1;
                 transition: transform 150ms ease-in-out;
@@ -82,9 +84,16 @@ const ProjectCardContent = styled("div")`
     }
 `
 
-const ProjectCardCategory = styled("h6")`
-    font-weight: 600;
+const ProjectCardYear = styled("div")`
+    font-weight: 400;
     color: ${colors.grey600};
+    font-size: 0.9em;
+`
+
+const ProjectCardCategory = styled("div")`
+    font-weight: 600;
+    color: ${colors.grey700};
+    font-size: 0.9em;
 `
 
 const ProjectCardTitle = styled("h3")`
@@ -108,7 +117,7 @@ const ProjectCardAction = styled("div")`
     color: currentColor;
     transition: all 150ms ease-in-out;
 
-    span {
+    .svg-inline--fa {
         margin-left: 1em;
         transform: translateX(-8px);
         display: inline-block;
@@ -163,9 +172,12 @@ const ProjectCardImageContainerInner = styled("div")`
     }
 `
 
-const ProjectCard = ({ tags, title, description, thumbnail, uid}) => (
+const ProjectCard = ({ tags, title, description, thumbnail, date, uid}) => (
     <ProjectCardContainer to={`/work/${uid}`}>
         <ProjectCardContent className="ProjectCardContent">
+            <ProjectCardYear>
+                {date.substring(0,4)}
+            </ProjectCardYear>
             <ProjectCardCategory>
                 {tags
                     .sort((a, b) => a.project_tag > b.project_tag ? 1 : -1)
@@ -180,7 +192,7 @@ const ProjectCard = ({ tags, title, description, thumbnail, uid}) => (
                 {RichText.render(description)}
             </ProjectCardBlurb>
             <ProjectCardAction className="ProjectCardAction">
-                Details <span>&#8594;</span>
+                Details <FontAwesomeIcon icon={faArrowRight} />
             </ProjectCardAction>
         </ProjectCardContent>
         <ProjectCardImageContainer className="ProjectCardImageContainer">

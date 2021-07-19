@@ -5,7 +5,7 @@ import dimensions from "styles/dimensions";
 
 const ButtonContainer = styled("button")`
     padding: 1em 2em;
-    background: ${colors.blue400};
+    background: ${colors.blue600};
     font-weight: 600;
     color: white;
     outline: none;
@@ -31,7 +31,7 @@ const ButtonContainer = styled("button")`
 
     &.Button--secondary {
         background: ${colors.blue200};
-        color: ${colors.blue600};
+        color: ${colors.blue800};
         padding: 0.95em 1.8em;
         font-size: 0.95rem;
 
