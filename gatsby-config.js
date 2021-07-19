@@ -19,6 +19,7 @@ module.exports = {
     `gatsby-plugin-resolve-src`,
     `gatsby-plugin-remove-trailing-slashes`,
     `gatsby-plugin-emotion`,
+    `gatsby-plugin-fontawesome-css`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -34,6 +35,8 @@ module.exports = {
             repositoryName: 'dc-portfolio', // (REQUIRED, replace with your own)
             defaultLang: 'en-us', // optional, but recommended
             previews: false,
+            prismicToolbar: false,
+            accessToken: 'MC5ZUFRwR1JJQUFDb0FCTE5z.77-9QxFtDe-_vQ7vv73vv73vv73vv71wGBdA77-9Px7vv70T77-9OO-_ve-_ve-_vR3vv712U--_vQtC',
             linkResolver: () => post => `/${post.uid}`,
         }
     },
