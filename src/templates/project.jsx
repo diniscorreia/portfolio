@@ -244,7 +244,7 @@ const Project = ({ project, meta }) => {
                                 </Button>
                             </a>
                         )}
-                        <WorkLink to={"/"}>
+                        <WorkLink to={"/#work"}>
                             <Button className="Button--secondary">
                                 See other work
                             </Button>

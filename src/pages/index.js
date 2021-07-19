@@ -134,7 +134,7 @@ const RenderBody = ({ home, projects, meta }) => (
                 </Button>
             </a>
         </Hero>
-        <Section>
+        <Section id="work">
             <SectionTitle>
                 Selected Work
             </SectionTitle>
