@@ -32,6 +32,8 @@ module.exports = {
         resolve: '@prismicio/gatsby-source-prismic-graphql',
         options: {
             repositoryName: 'dc-portfolio', // (REQUIRED, replace with your own)
+            defaultLang: 'en-us', // optional, but recommended
+            previews: false,
             linkResolver: () => post => `/${post.uid}`,
         }
     },
