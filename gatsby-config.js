@@ -6,7 +6,7 @@ module.exports = {
     author: `Dinis Correia`,
     siteUrl: `https://diniscorreia.com/portfolio`,
     url: `https://diniscorreia.com/portfolio`, 
-    image: `/images/og-image.jpg`,
+    image: `/images/og-image.png`,
     twitterUsername: `@diniscorreia`
   },
   plugins: [
